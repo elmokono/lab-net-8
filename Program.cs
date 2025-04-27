@@ -26,12 +26,12 @@ builder.Services.AddSingleton<IMongoClient>(sp =>
 });
 
 //users
-builder.Services.AddSingleton<IUsersService, UsersService>();
+builder.Services.AddScoped<IUsersService, UsersService>();
 builder.Services.AddSingleton<IUsersRepository, UsersRepositoryDynDB>(); //dynamodb implementation
 builder.Services.AddScoped<UsersController>();
 
 //products
-builder.Services.AddSingleton<IProductsService, ProductsService>();
+builder.Services.AddScoped<IProductsService, ProductsService>();
 builder.Services.AddSingleton<IProductsRepository, ProductsRepositoryDynDB>(); //dynamodb implementation
 builder.Services.AddScoped<ProductsController>();
 

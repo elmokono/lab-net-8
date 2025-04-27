@@ -48,5 +48,16 @@ namespace MyAwsApp.Repositories
                 Stock = (int)product["Stock"]
             };
         }
+
+        public async Task Hydrate()
+        {
+            await AddProductAsync(new Product { 
+                Description = "My Demo Product",
+                Name = "Product001",
+                Price = (decimal)10.95,
+                ProductId = "001",
+                Stock = 90
+            });
+        }
     }
 }
