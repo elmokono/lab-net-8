@@ -3,6 +3,7 @@ using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using MyAwsApp.Controllers;
 
+#region builder
 var builder = WebApplication.CreateBuilder(args);
 
 //aws
@@ -24,7 +25,9 @@ builder.Services.AddSingleton<IMongoClient>(sp =>
     var settings = sp.GetRequiredService<IOptions<MongoDBSettings>>().Value;
     return new MongoClient(settings.ConnectionString);
 });
+#endregion
 
+#region services
 //users
 builder.Services.AddScoped<IUsersService, UsersService>();
 builder.Services.AddSingleton<IUsersRepository, UsersRepositoryDynDB>(); //dynamodb implementation
@@ -39,14 +42,15 @@ builder.Services.AddScoped<ProductsController>();
 builder.Services.AddSingleton<IOrdersService, OrdersService>();
 builder.Services.AddSingleton<IOrdersRepository, OrdersRepositoryMongoDB>(); //mongo implementation
 builder.Services.AddScoped<OrdersController>();
-
+#endregion
 
 var app = builder.Build();
 
+#region controllers
 //controllers
 new UsersController().MapUsersEndpoints(app);
 new ProductsController().MapUsersEndpoints(app);
 new OrdersController().MapUsersEndpoints(app);
-
+#endregion
 
 app.Run();
