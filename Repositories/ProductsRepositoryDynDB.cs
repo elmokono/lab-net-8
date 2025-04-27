@@ -14,9 +14,9 @@ namespace MyAwsApp.Repositories
         private readonly AmazonDynamoDBClient _amazonDynamoDBClient;
         private readonly Table _tableProducts;
 
-        public ProductsRepositoryDynDB()
+        public ProductsRepositoryDynDB(AmazonDynamoDBClient amazonDynamoDBClient)
         {
-            _amazonDynamoDBClient = new AmazonDynamoDBClient();
+            _amazonDynamoDBClient = amazonDynamoDBClient;
             _tableProducts = Table.LoadTable(_amazonDynamoDBClient, "Products");
         }
 

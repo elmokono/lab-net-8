@@ -1,7 +1,4 @@
-﻿using Amazon.DynamoDBv2.DocumentModel;
-using Amazon.DynamoDBv2;
-
-namespace MyAwsApp.Services
+﻿namespace MyAwsApp.Services
 {
     public interface IProductsService
     {

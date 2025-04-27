@@ -1,7 +1,4 @@
-﻿using MyAwsApp.Models;
-using MyAwsApp.Repositories;
-
-namespace MyAwsApp.Services
+﻿namespace MyAwsApp.Services
 {
     public interface IUsersService
     {

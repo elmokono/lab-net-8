@@ -15,12 +15,10 @@ namespace MyAwsApp.Repositories
         private readonly AmazonDynamoDBClient _amazonDynamoDBClient;
         private readonly Table _usersTable;
 
-        public UsersRepositoryDynDB()
+        public UsersRepositoryDynDB(AmazonDynamoDBClient amazonDynamoDBClient)
         {
-
-            _amazonDynamoDBClient = new AmazonDynamoDBClient();
+            _amazonDynamoDBClient = amazonDynamoDBClient;
             _usersTable = Table.LoadTable(_amazonDynamoDBClient, "Users");
-
         }
 
         public async Task HydrateDB(int count)
