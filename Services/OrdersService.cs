@@ -17,6 +17,10 @@
 
         public async Task AddOrderAsync(Order order)
         {
+            if (order.Items.Count == 0) throw new MissingFieldException("empty items");
+
+            if (string.IsNullOrEmpty(order.ClientUserId)) throw new MissingFieldException("missing client");
+
             await _ordersRepository.AddOrderAsync(order);
         }
 

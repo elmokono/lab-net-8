@@ -5,9 +5,18 @@ using MyAwsApp.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 //aws
-builder.Services.AddSingleton<AmazonDynamoDBClient>();
+builder.Services.Configure<DynamoDbSettings>(builder.Configuration.GetSection("DynamoDbSettings"));
+builder.Services.AddSingleton(sp =>
+{
+    var settings = sp.GetRequiredService<IOptions<DynamoDbSettings>>().Value;
+    var config = new AmazonDynamoDBConfig
+    {
+        ServiceURL = settings.ServiceURL
+    };
+    return new AmazonDynamoDBClient(config);
+});
+
 //mongodb
 builder.Services.Configure<MongoDBSettings>(builder.Configuration.GetSection("MongoDbSettings"));
 builder.Services.AddSingleton<IMongoClient>(sp =>
