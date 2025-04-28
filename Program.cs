@@ -4,7 +4,6 @@ using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using MyAwsApp.Controllers;
 using MyAwsApp.Validators;
-using System;
 
 #region builder
 var builder = WebApplication.CreateBuilder(args);

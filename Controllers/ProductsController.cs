@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using MyAwsApp.Validators;
 
 namespace MyAwsApp.Controllers
 {
