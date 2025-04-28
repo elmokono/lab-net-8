@@ -51,6 +51,9 @@ builder.Services.AddValidatorsFromAssemblyContaining<ProductDtoValidator>();
 
 var app = builder.Build();
 
+app.UseExceptionHandler("/error");
+app.MapGet("/error", () => Results.Problem("An unexpected error occurred"));
+
 #region controllers
 //controllers
 new UsersController().MapUsersEndpoints(app);
