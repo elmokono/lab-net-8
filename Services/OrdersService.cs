@@ -2,8 +2,8 @@
 {
     public interface IOrdersService
     {
-        Task AddOrderAsync(Order order);
-        Task<Order> GetOrderAsync(string id);
+        Task AddOrderAsync(OrderDto order);
+        Task<OrderDto> GetOrderAsync(string id);
     }
 
     public class OrdersService : IOrdersService
@@ -15,7 +15,7 @@
             _ordersRepository = ordersRepository;
         }
 
-        public async Task AddOrderAsync(Order order)
+        public async Task AddOrderAsync(OrderDto order)
         {
             if (order.Items.Count == 0) throw new MissingFieldException("empty items");
 
@@ -24,7 +24,7 @@
             await _ordersRepository.AddOrderAsync(order);
         }
 
-        public async Task<Order> GetOrderAsync(string id)
+        public async Task<OrderDto> GetOrderAsync(string id)
         {
             return await _ordersRepository.GetOrderAsync(id);
         }

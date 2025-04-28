@@ -2,8 +2,8 @@
 {
     public interface IUsersService
     {
-        Task AddUserAsync(User user);
-        Task<User?> GetUserByIdAsync(string id);
+        Task AddUserAsync(UserDto user);
+        Task<UserDto?> GetUserByIdAsync(string id);
         Task HydrateDB(int count);
     }
 
@@ -16,12 +16,12 @@
             _usersRepository = usersRepository;
         }
 
-        public async Task AddUserAsync(User user)
+        public async Task AddUserAsync(UserDto user)
         {
             await _usersRepository.AddUserAsync(user);
         }
 
-        public async Task<User?> GetUserByIdAsync(string id)
+        public async Task<UserDto?> GetUserByIdAsync(string id)
         {
             return await _usersRepository.GetUserByIdAsync(id);
         }

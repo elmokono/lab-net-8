@@ -15,7 +15,7 @@
 
             });
 
-            app.MapPost("/api/orders", async (Order order, IOrdersService ordersService) =>
+            app.MapPost("/api/orders", async (OrderDto order, IOrdersService ordersService) =>
             {
 
                 await ordersService.AddOrderAsync(order);

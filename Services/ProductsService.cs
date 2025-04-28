@@ -2,8 +2,8 @@
 {
     public interface IProductsService
     {
-        Task AddProductAsync(Product product);
-        Task<Product?> GetProductAsync(string id);
+        Task AddProductAsync(ProductDto product);
+        Task<ProductDto?> GetProductAsync(string id);
     }
 
     public class ProductsService : IProductsService
@@ -15,12 +15,12 @@
             _productsRepository = productsRepository;
         }
 
-        public async Task AddProductAsync(Product product)
+        public async Task AddProductAsync(ProductDto product)
         {
             await _productsRepository.AddProductAsync(product);
         }
 
-        public async Task<Product?> GetProductAsync(string id)
+        public async Task<ProductDto?> GetProductAsync(string id)
         {
             return await _productsRepository.GetProductAsync(id);
         }

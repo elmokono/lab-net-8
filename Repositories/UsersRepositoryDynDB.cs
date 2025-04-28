@@ -5,8 +5,8 @@ namespace MyAwsApp.Repositories
 {
     public interface IUsersRepository
     {
-        Task AddUserAsync(User user);
-        Task<User?> GetUserByIdAsync(string id);
+        Task AddUserAsync(UserDto user);
+        Task<UserDto?> GetUserByIdAsync(string id);
         Task HydrateDB(int count);
     }
 
@@ -32,7 +32,7 @@ namespace MyAwsApp.Repositories
             for (int i = 0; i < count; i++)
             {
                 await AddUserAsync(
-                    new User
+                    new UserDto
                     {
                         UserId = Guid.NewGuid().ToString(),
                         Name = $"{DateTime.Now.ToLongTimeString()}",
@@ -41,13 +41,13 @@ namespace MyAwsApp.Repositories
             }
         }
 
-        public async Task<User?> GetUserByIdAsync(string id)
+        public async Task<UserDto?> GetUserByIdAsync(string id)
         {
 
             var document = await _usersTable.GetItemAsync(id);
             if (document == null) return null;
 
-            return new User
+            return new UserDto
             {
                 Email = document["Email"],
                 UserId = id,
@@ -55,7 +55,7 @@ namespace MyAwsApp.Repositories
             };
         }
 
-        public async Task AddUserAsync(User user)
+        public async Task AddUserAsync(UserDto user)
         {
 
             var document = new Document

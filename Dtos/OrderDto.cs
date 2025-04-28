@@ -1,15 +1,15 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace MyAwsApp.Models
+namespace MyAwsApp.Dtos
 {
-    public class Order
+    public class OrderDto
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string OrderId { get; set; }
         public DateTime CreatedOn { get; set; }
         public string ClientUserId { get; set; }
-        public List<OrderItem> Items { get; set; } = [];
+        public List<OrderItemDto> Items { get; set; } = [];
     }
 }

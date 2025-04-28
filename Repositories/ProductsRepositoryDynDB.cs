@@ -5,8 +5,8 @@ namespace MyAwsApp.Repositories
 {
     public interface IProductsRepository
     {
-        Task AddProductAsync(Product product);
-        Task<Product?> GetProductAsync(string id);
+        Task AddProductAsync(ProductDto product);
+        Task<ProductDto?> GetProductAsync(string id);
     }
 
     public class ProductsRepositoryDynDB : IProductsRepository
@@ -20,7 +20,7 @@ namespace MyAwsApp.Repositories
             _tableProducts = Table.LoadTable(_amazonDynamoDBClient, "Products");
         }
 
-        public async Task AddProductAsync(Product product)
+        public async Task AddProductAsync(ProductDto product)
         {
             var newProduct = new Document
             {
@@ -33,13 +33,13 @@ namespace MyAwsApp.Repositories
             await _tableProducts.PutItemAsync(newProduct);
         }
 
-        public async Task<Product?> GetProductAsync(string id)
+        public async Task<ProductDto?> GetProductAsync(string id)
         {
             var product = await _tableProducts.GetItemAsync(id);
 
             if (product == null) return null;
 
-            return new Product
+            return new ProductDto
             {
                 Description = product["Description"],
                 Name = product["Name"],
@@ -51,7 +51,7 @@ namespace MyAwsApp.Repositories
 
         public async Task Hydrate()
         {
-            await AddProductAsync(new Product { 
+            await AddProductAsync(new ProductDto { 
                 Description = "My Demo Product",
                 Name = "Product001",
                 Price = (decimal)10.95,

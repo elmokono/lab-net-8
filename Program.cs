@@ -1,7 +1,10 @@
 using Amazon.DynamoDBv2;
+using FluentValidation;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using MyAwsApp.Controllers;
+using MyAwsApp.Validators;
+using System;
 
 #region builder
 var builder = WebApplication.CreateBuilder(args);
@@ -25,9 +28,7 @@ builder.Services.AddSingleton<IMongoClient>(sp =>
     var settings = sp.GetRequiredService<IOptions<MongoDBSettings>>().Value;
     return new MongoClient(settings.ConnectionString);
 });
-#endregion
 
-#region services
 //users
 builder.Services.AddScoped<IUsersService, UsersService>();
 builder.Services.AddSingleton<IUsersRepository, UsersRepositoryDynDB>(); //dynamodb implementation
@@ -42,6 +43,11 @@ builder.Services.AddScoped<ProductsController>();
 builder.Services.AddSingleton<IOrdersService, OrdersService>();
 builder.Services.AddSingleton<IOrdersRepository, OrdersRepositoryMongoDB>(); //mongo implementation
 builder.Services.AddScoped<OrdersController>();
+
+//validators
+builder.Services.AddScoped<IValidator<ProductDto>, ProductDtoValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<ProductDtoValidator>();
+
 #endregion
 
 var app = builder.Build();

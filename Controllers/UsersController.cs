@@ -15,7 +15,7 @@
 
             });
 
-            app.MapPost("/api/users", async (User user, IUsersService usersService) =>
+            app.MapPost("/api/users", async (UserDto user, IUsersService usersService) =>
             {
 
                 await usersService.AddUserAsync(user);
