@@ -5,6 +5,8 @@ VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyAwsApp", "MyAwsApp.csproj", "{12DCFD28-E2C3-B8CA-B13E-A5AF9CCB3C40}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject1", "Tests\TestProject1.csproj", "{CBE60EE0-FDD7-A1DF-421A-FA9D2D318C57}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{12DCFD28-E2C3-B8CA-B13E-A5AF9CCB3C40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12DCFD28-E2C3-B8CA-B13E-A5AF9CCB3C40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12DCFD28-E2C3-B8CA-B13E-A5AF9CCB3C40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBE60EE0-FDD7-A1DF-421A-FA9D2D318C57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBE60EE0-FDD7-A1DF-421A-FA9D2D318C57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBE60EE0-FDD7-A1DF-421A-FA9D2D318C57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBE60EE0-FDD7-A1DF-421A-FA9D2D318C57}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
