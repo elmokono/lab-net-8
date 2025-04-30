@@ -27,6 +27,13 @@ namespace MyAwsApp.Controllers
                 return Results.Created($"/api/products/{product.ProductId}", product);
 
             });
+
+            app.MapGet("/api/products/search/{pattern}", async (string pattern, IProductsService productsService) =>
+            {
+                var products = await productsService.GetProductsAsync(pattern);
+
+                return Results.Ok(products);
+            });
         }
     }
 }

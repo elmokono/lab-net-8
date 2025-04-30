@@ -4,6 +4,7 @@
     {
         Task AddProductAsync(ProductDto product);
         Task<ProductDto?> GetProductAsync(string id);
+        Task<List<ProductDto>> GetProductsAsync(string pattern);
     }
 
     public class ProductsService : IProductsService
@@ -23,6 +24,11 @@
         public async Task<ProductDto?> GetProductAsync(string id)
         {
             return await _productsRepository.GetProductAsync(id);
+        }
+
+        public async Task<List<ProductDto>> GetProductsAsync(string pattern)
+        {
+            return await _productsRepository.GetProductsAsync(pattern);
         }
     }
 }
