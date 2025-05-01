@@ -1,4 +1,5 @@
 using Amazon.DynamoDBv2;
+using Amazon.SQS;
 using FluentValidation;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
@@ -9,15 +10,24 @@ using MyAwsApp.Validators;
 var builder = WebApplication.CreateBuilder(args);
 
 //aws
-builder.Services.Configure<DynamoDbSettings>(builder.Configuration.GetSection("DynamoDbSettings"));
+//dynamo
 builder.Services.AddSingleton(sp =>
 {
-    var settings = sp.GetRequiredService<IOptions<DynamoDbSettings>>().Value;
     var config = new AmazonDynamoDBConfig
     {
-        ServiceURL = settings.ServiceURL
+        ServiceURL = builder.Configuration["DynamoDbSettings:ServiceURL"]
     };
     return new AmazonDynamoDBClient(config);
+});
+
+//sqs
+builder.Services.AddSingleton<IAmazonSQS>(sp =>
+{
+    var config = new AmazonSQSConfig
+    {
+        ServiceURL = builder.Configuration["SQSSettings:ServiceURL"]
+    };
+    return new AmazonSQSClient(config);
 });
 
 //mongodb
@@ -35,6 +45,7 @@ builder.Services.AddScoped<UsersController>();
 
 //products
 builder.Services.AddScoped<IProductsService, ProductsService>();
+builder.Services.AddScoped<IProductsQueueService, ProductsQueueService>(); ; //sqs implementation
 builder.Services.AddSingleton<IProductsRepository, ProductsRepositoryDynDB>(); //dynamodb implementation
 builder.Services.AddScoped<ProductsController>();
 

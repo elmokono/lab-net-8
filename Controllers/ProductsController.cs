@@ -16,13 +16,16 @@ namespace MyAwsApp.Controllers
             });
 
 
-            app.MapPost("/api/products", async (ProductDto product, IValidator<ProductDto> validator, IProductsService productsService) =>
+            //app.MapPost("/api/products", async (ProductDto product, IValidator<ProductDto> validator, IProductsService productsService) =>
+            app.MapPost("/api/products", async (ProductDto product, IValidator<ProductDto> validator, IProductsQueueService productsService) =>
             {
                 var validation = await validator.ValidateAsync(product);
 
                 if (!validation.IsValid) return Results.ValidationProblem(validation.ToDictionary());
 
-                await productsService.AddProductAsync(product);
+
+                //await productsService.AddProductAsync(product);
+                await productsService.CreateProductAsync(product);
 
                 return Results.Created($"/api/products/{product.ProductId}", product);
 
