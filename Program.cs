@@ -45,7 +45,7 @@ builder.Services.AddSingleton<IUsersRepository, UsersRepositoryDynDB>(); //dynam
 builder.Services.AddScoped<UsersController>();
 
 //products
-builder.Services.AddScoped<IProductsService, ProductsService>();
+builder.Services.AddSingleton<IProductsService, ProductsService>();//used in ordersService
 builder.Services.AddScoped<IProductsQueueService, ProductsQueueService>(); ; //sqs implementation
 builder.Services.AddSingleton<IProductsRepository, ProductsRepositoryDynDB>(); //dynamodb implementation
 builder.Services.AddScoped<ProductsController>();
