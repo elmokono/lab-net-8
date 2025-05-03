@@ -1,0 +1,1 @@
+Sample App for using minimal-api + mongodb + lambda + sqs + dynamo
