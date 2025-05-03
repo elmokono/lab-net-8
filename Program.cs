@@ -3,6 +3,7 @@ using Amazon.SQS;
 using FluentValidation;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using MyAwsApp;
 using MyAwsApp.Controllers;
 using MyAwsApp.Validators;
 
@@ -62,7 +63,9 @@ builder.Services.AddValidatorsFromAssemblyContaining<ProductDtoValidator>();
 
 var app = builder.Build();
 
-app.UseExceptionHandler("/error");
+//exception handler
+app.UseMiddleware<ErrorHandlingMiddleware>();
+//app.UseExceptionHandler("/error");
 app.MapGet("/error", () => Results.Problem("An unexpected error occurred"));
 
 #region controllers
